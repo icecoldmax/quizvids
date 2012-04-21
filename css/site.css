@@ -1,0 +1,198 @@
+html, body {
+	text-align: center;
+	background-color: black;
+	color: orange;
+	font-family: Helvetica,Arial,sans-serif;
+}
+
+#layer1 {
+	width: 80%;
+	height: 720px;
+	margin: 0px auto;
+	border: outset 5px darkgrey;
+}
+
+#popup {
+	font-family: Helvetica, Arial, sans-serif;
+	color: lightblue;
+}
+
+h1 {
+	text-decoration: underline;
+	font-size: 3em;
+	font-style: italic;
+}
+
+h3 {
+	text-decoration: underline;
+	margin: 5px;
+}
+
+.quizResult {
+	font-size: 30px;
+	font-style: italic;
+}
+
+input[type=text] {
+	text-align: center;
+}
+
+#popup input[type=text] {
+
+	height: 50px;
+	color: darkblue;
+	font-size: 20px;
+}
+
+#vidInfo {
+	display: none;
+}
+
+#videosBar {
+	width: 100%;
+	margin: 0px auto;
+	text-align: center;
+}
+
+#videosBar ul {
+
+	text-align: center;
+}
+
+#quizOptions {
+	width: 50%;
+	margin: 10px auto;
+	padding: 10px;
+	background-color: darkgrey;
+	color: darkblue;
+}
+
+#playlist {
+	margin: 10px 0px;
+	padding: 10px;
+}
+
+#quizOptions h3 {
+	color: darkblue;
+	font-size: 1.5em;
+	font-family: Helvetica,Arial,sans-serif;
+
+}
+
+#quizOptions table {
+	width: 75%;
+	margin: 1px auto;
+	
+	border-collapse: collapse;
+}
+
+#quizOptions tr {
+	height: 30px;
+	border-bottom: solid white 1px;
+}
+
+#quizOptions table td, #quizOptions table th {
+	height: 10px;
+	padding: 0px;
+}
+
+#quizOptions table th {
+	text-align: left;
+}
+
+#quizOptions table input {
+	margin: 0px;
+	padding: 1px;
+}
+
+#userQuizzes {
+	text-align: left;
+}
+
+#playlist input[type=text] {
+	height: 30px;
+	font-size: 1.5em;
+}
+#searchBar {
+	margin: 10px;
+}
+
+#searchInput {
+	width: 45%;
+	height: 30px;
+	font-size: 20px;
+}
+
+button {
+	height: 30px;
+}
+
+#searchSubmit {
+	font-size: 1em;
+}
+
+#quizPlaylist {
+	width: 50%;
+	margin: 10px auto;
+	border: crimson solid 1px;
+	padding: 10px;
+}
+
+#playlist ul, #quizPlaylist ul {
+	list-style: none;
+}
+
+.titlec {
+  font-size: small;
+  color: darkblue;
+
+}
+ul.videos li {
+	display: inline-block;
+ 	/*float: left;*/
+ 	width: 10em;
+ 	margin-bottom: 1em;
+ 	cursor: pointer;
+
+}
+ul.videos, #playlist ul
+{
+  margin-bottom: 1em;
+  padding-left : 0em;
+  margin-left: 0em;
+  list-style: none;
+}
+
+#prevNextButtons {
+	margin: 10px;
+}
+
+#countingImgs {
+	background: white;
+}
+#countingImgs img {
+	padding: 10px;
+	width: 25%;
+	height: 25%;
+	display: inline;
+}
+
+#quizContent table {
+	width: 100%;
+	margin: 10px auto;
+	border-collapse: collapse;
+	font-size: 2em;
+}
+
+#quizContent table td {
+	border: solid 1px white;
+	height: 2em;
+	width: 50%;
+}
+
+#quizContent table td:hover {
+	cursor: pointer;
+	background-color: green;
+}
+
+

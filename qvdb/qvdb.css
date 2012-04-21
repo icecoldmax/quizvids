@@ -1,0 +1,27 @@
+.small {
+	font-size: 0.9em;
+}
+
+.smallItalic {
+	font-size: 0.9em;
+	font-style: italic;
+}
+
+.big {
+	font-size: 1.1em;
+}
+
+.wrong, .right {
+	cursor: pointer;
+}
+
+.newQuizQA {
+	width: 250px;
+	padding: 0px 5px;
+
+	border: solid 1px black;
+}
+
+h2 {
+	text-decoration: underline;
+}
