@@ -64,13 +64,30 @@ $(document).ready(function() {
 	// });
 
 	$('#quizContent table td').click(function() {
+		if (clickCount == 0) {
+			clickCount = 1;
+		} else if (clickCount > 0) {
+			clickCount++;
+		}
+		console.log("Click " + clickCount);
 		
 		var clickedAnswer = $(this).text();
 	
 		if (clickedAnswer == correctAnswer || parseInt(clickedAnswer) == correctAnswer) {
+			if (clickCount == 1) {
+				thisQuestion.lastTimeCorrect = true;
+				totalCorrectAns++; // add 1 to score
+				
+			} else if (clickCount > 1) {
+				thisQuestion.lastTimeCorrect = false;
+			}
+
+			console.log("lastTimeCorrect: " + thisQuestion.lastTimeCorrect);
+
 			$('.quizResult').text("Correct!!");
 			$('#popup').css({"background-color": "lightgreen"});
 			$('#popup').animate({"background-color": "green"}, 600);
+			
 
 			setTimeout(function() {
 				$('#popup').jqmHide();

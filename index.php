@@ -37,7 +37,7 @@ $(document).ready(function() {
 		$(this).before('<input type="hidden" id="vidCount" name="vidCount" value="' + $('.playlistEntry').length + '"/ >');
 		
 		var paramString = "vidCount=" + $('#vidCount').val() + '&';
-				
+		//var paramString = '';		
 		$('.playlistEntry').each(function() {
 			var inputTag = $(this).find('input');
 			paramString += $(inputTag).attr('name') + '=' + $(inputTag).attr('data-vidcode') + '&';

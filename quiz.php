@@ -134,8 +134,11 @@
 
 <div class="jqmWindow" id="popup">
 	<h1>Quiz time!</h1>
+	<p id="qNumber">Question <span></span></p>
 
 	<h2 id="quizH2"></h2>
+	<p id="score">Score: <span id="totalCorrectAns">0</span> / <span id="totalQsAsked">0</span> <span id="scorePercentage">(0%)</span></p>
+	<p id="lastTimeCorrect" style="display: none;">You answered this question <span id="lastTimeCorrectStatus">correctly</span> last time!</p>
 
 	<div id="quizContent">
 

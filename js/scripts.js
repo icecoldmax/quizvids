@@ -29,6 +29,7 @@ var quizAnswerSpans; // all the spans in the quiz answer table
 
 var uqna = {}; // all the user quiz info (questions and answers)
 var uqYetToAskQs = {};
+var thisQuestion;
 
 var vids = []; // video playlist
 var vidCount; // number of videos in playlist
@@ -41,6 +42,10 @@ var quizImgs = ['balloon', 'froggy', 'redcar', 'sailboat','strawberry'];
 var quizImgsLength = quizImgs.length;
 var correctAnswer; // correct answer to the quiz question
 
+var clickCount = 0; // number of times clicked on the answers
+var totalQsAsked = 0; // how many times has a question popped up?
+var totalCorrectAns = 0; // how many did the user get right first time?
+var qNumber = 1;
 
 var imgFiles = ['images/balloon.png', 'images/froggy.png', 'images/redcar.png', 'images/sailboat.png', 'images/strawberry.png'];
 
@@ -307,17 +312,16 @@ function prepQuiz() {
 			var qzTitle = data[j].qzTitle;
 			var creator = data[j].creator;
 			var qzid = data[j].qzid;
-			uqna[qzid][j] = {'q': qText, 'ansY': ansY, 'ansN' : ansN, 'qzTitle': qzTitle, 'creator': creator, 'qzid': qzid};
+			uqna[qzid][j] = {'q': qText, 'ansY': ansY, 'ansN' : ansN, 'qzTitle': qzTitle, 'creator': creator, 'qzid': qzid, 'lastTimeCorrect': true };
 			uqYetToAskQs[qzid].push(j);
 		}
 
+		// randomise the order of the questions for the first time (it is done again in showQuiz() )
 		for (quiz in uqYetToAskQs) {
 			uqYetToAskQs[quiz].sort(function() {return 0.5 - Math.random()} ); 
 		}
 		
 	}
-
-
 
 }
 
@@ -343,6 +347,9 @@ function showQuiz() {
 	if (nextProblem != "uq") {
 		var allNumbers = []; 
 	}
+
+	// set the clickedCount back to 0 for the next question
+	clickCount = 0;
 
 /* 
 ------------------------------------------------------
@@ -532,21 +539,33 @@ function showQuiz() {
 		
 	/* if all the questions have been asked already, uqYetToAskQs[thisQuiz] will be empty.
 		So, we have to repopulate it and re-randomise it
+
+		Also, we are going to add all the questions the user didn't click correctly on the first go in AGAIN so they appear more often
 	*/
 		if (uqYetToAskQs[thisQuiz].length == 0) {
 			console.log("Repopulating uqYetToAskQs for quiz id " + thisQuiz + "...");
 			for (var i = 0; i < questionCount; i++) {
 				uqYetToAskQs[thisQuiz].push(i);
+				
+				if (uqna[thisQuiz][i].lastTimeCorrect == false) {
+					uqYetToAskQs[thisQuiz].push(i);
+					console.log("Adding question " + i + " again (lastTimeCorrect = false)");
+				}
+
 			}
+
 			uqYetToAskQs[thisQuiz].sort(function() {return 0.5 - Math.random()} ); 
+
+		// enable "You answered this question ..." line on quiz popup
+			$('#lastTimeCorrect').show();
 		}
 
 		var unaskedQs = uqYetToAskQs[thisQuiz];
 
-		console.log(thisQuiz + ": " + unaskedQs);
+		console.log("Quiz ID: " + thisQuiz + ". Unasked Qs: " + unaskedQs);
 
 		var whichQ = unaskedQs[0]; // gives the randomised index to choose the question
-		var thisQuestion = uqna[thisQuiz][whichQ]; // gives the question!
+		thisQuestion = uqna[thisQuiz][whichQ]; // gives the question!
 		unaskedQs.shift(); // chops off that one, and when there are none left it repopulates them!
 
 	// then get the info we want
@@ -556,6 +575,15 @@ function showQuiz() {
 		var questionText = thisQuestion['q'];
 		correctAnswer = thisQuestion['ansY'];
 		var incorrectAnswers = thisQuestion['ansN'];
+
+	// set "You answered this question ..." to 'correctly' or 'incorrectly'	
+		if (thisQuestion.lastTimeCorrect == true) {
+			$('#lastTimeCorrectStatus').html('correctly').css({'color': 'lightgreen'});
+		} else {
+			$('#lastTimeCorrectStatus').html('incorrectly').css({'color': 'red'});
+		}
+
+
 		//console.log("incorrect answers: " + incorrectAnswers);
 
 		// ask the question
@@ -661,6 +689,16 @@ function showQuiz() {
 	// make sure the background is black (i.e. not green or pink)
 	$('#popup').css({"background": "black"});
 
+	// fix score
+	$('#qNumber span').html(qNumber);
+	$('#totalQsAsked').html(totalQsAsked);
+	$('#totalCorrectAns').html(totalCorrectAns);
+	var scorePercentage = ((totalCorrectAns / totalQsAsked) * 100);
+	if (isNaN(scorePercentage)) {
+		scorePercentage = 0;
+	}
+	$('#scorePercentage').html("(" + scorePercentage + "%)");
+
 	// show that motherfuckin' quiz!
 	$('#popup').jqmShow();
 
@@ -673,6 +711,11 @@ var popupClose = function(hash) {
 		$('#popup').css({"background": "black"});
 		$('#countingImgs').html("");
 		$(quizAnswerSpans).text('');
+
+		// add one to the number of questions shown
+		totalQsAsked++;
+		qNumber++;
+
 		playWithStops();
 	});
 };
