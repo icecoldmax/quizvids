@@ -1,16 +1,16 @@
-<html>
+<?php
+session_start();
+?>
+<!DOCTYPE html>
 <?php
 
 date_default_timezone_set('Asia/Tokyo');
 
-$db = new mysqli('localhost', 'qv', 'qv', 'qvtest');
-
-if (mysqli_connect_errno()) {
-	die(mysqli_connect_error());
-}
+include('../localdb.inc');
+//include('../../../qvdbconn.inc');
 
 ?>
-
+<html>
 <head>
 	<!-- <meta http-equiv="Content-type" content="text/html; charset=utf-8"> -->
 	<title>quiz db</title>
@@ -20,6 +20,17 @@ if (mysqli_connect_errno()) {
 	<script type="text/javascript">
 
 	$(document).ready(function() {
+
+		function quizCreated() {
+			var quiz_created = "yes";
+			$.post('quizcountupdate.php',
+				{ quiz_created: quiz_created },
+				function(data) {
+					console.log(data);
+				}
+			);
+		}
+		
 		var html = $('.newQuizQA')[0];
 
 		$('#addQ').click(function() {
@@ -58,7 +69,10 @@ if (mysqli_connect_errno()) {
 
 			submitAjax.done(function(data) {
 				$('#container').html(data);
+				quizCreated();
 			});
+
+
 
 
 			// $.post ('submitquiz.php',

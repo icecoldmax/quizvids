@@ -1,11 +1,8 @@
 <?php
 date_default_timezone_set('Asia/Tokyo');
 
-$db = new mysqli('localhost', 'qv', 'qv', 'qvtest');
-
-if (mysqli_connect_errno()) {
-	die(mysqli_connect_error());
-}
+//include('../../../qvdbconn.inc');
+include('../localdb.inc');
 
 function getAllQuizzes($db) {
 	$query = "select * from quizzes";
@@ -45,6 +42,6 @@ EOF;
 }
 
 echo getAllQuizzes($db);
-
+$db->close();
 
 ?>

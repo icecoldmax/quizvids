@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -68,8 +71,8 @@ $(document).ready(function() {
 			paramString += 'interval=30';
 		}
 		
-		console.log(paramString);
-
+		//console.log(paramString);
+		
 		window.location.assign('http://localhost/quizvids/quiz.php?' + paramString, '_blank');
 		//window.location.assign('http://www.stopdontpanic.com/quizvids/quiz.php?' + paramString);
 		return false;
@@ -85,10 +88,23 @@ $(document).ready(function() {
 
 <div id="header">
 	<h1>QuizVids!</h1>
+	<?php
+	if (!isset($_SESSION['logged_in'])) {
+		$_SESSION['logged_in'] = false;
+	}
+	
+	if ($_SESSION['logged_in'] == true) {
+		echo '<p>Logged in as <strong>' . $_SESSION['username'] . '</strong>.<br /><a href="qvdb/logout.php">Logout</a> <a href="qvdb/account.php">My account</a></p>';
+	} else if ($_SESSION['logged_in'] == false) {
+		echo '<p><a href="qvdb/login.php">Login</a></p>';
+	}
+	?>
 </div>
 
 <div id="quizOptions">
 	<h3>Quiz Options</h3>
+
+
 	<form id="quizForm" action="quiz.php" method="get">
 		<table>
 			<tr id="addition">

@@ -1,6 +1,6 @@
 html, body {
 	text-align: center;
-	background-color: black;
+	/*background-color: black;*/
 	color: orange;
 	font-family: Helvetica,Arial,sans-serif;
 }
@@ -9,7 +9,7 @@ html, body {
 	width: 80%;
 	height: 720px;
 	margin: 0px auto;
-	border: outset 5px darkgrey;
+	/*border: outset 5px darkgrey;*/
 }
 
 #popup {

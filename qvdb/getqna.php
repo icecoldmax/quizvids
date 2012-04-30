@@ -1,11 +1,9 @@
 <?php
 date_default_timezone_set('Asia/Tokyo');
 
-$db = new mysqli('localhost', 'qv', 'qv', 'qvtest');
+//include('../../../qvdbconn.inc');
 
-if (mysqli_connect_errno()) {
-	die(mysqli_connect_error());
-}
+include('../localdb.inc');
 
 $quiz_id = $_POST['quiz_id'];
 //$quiz_id = '1';
@@ -27,7 +25,7 @@ function getQs($quiz_id, $db) {
 
 			$query2 = "select is_correct, answer_text from answers where question_id = $question_id";
 			$query2 = $db->real_escape_string($query2);
-			$ansN = [];
+			$ansN = array();
 			if ($result2 = $db->query($query2)) {
 				while ($row2 = $result2->fetch_object()) {
 					$is_correct = $row2->is_correct;
@@ -59,6 +57,7 @@ function getQs($quiz_id, $db) {
 
 }
 getQs($quiz_id, $db);
+$db->close();
 
 
 

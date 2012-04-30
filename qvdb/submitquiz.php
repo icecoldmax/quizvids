@@ -1,12 +1,10 @@
 <?php
+session_start();
 
 date_default_timezone_set('Asia/Tokyo');
 
-$db = new mysqli('localhost', 'qv', 'qv', 'qvtest');
-
-if (mysqli_connect_errno()) {
-	die(mysqli_connect_error());
-}
+//include('../../../qvdbconn.inc');
+include('../localdb.inc');
 
 $title = $_POST['title'];
 $username = $_POST['username'];
@@ -58,7 +56,7 @@ foreach ($allQAndA as $q) {
 		
 		$query->execute();
 		echo $db->error;
-		printf("%d Row inserted.\n", $query->affected_rows);
+		printf("%d row inserted.\n", $query->affected_rows);
 		
 	}
 	$query->close();

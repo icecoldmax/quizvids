@@ -153,6 +153,8 @@ $(document).ready(function() {
 	getVidsFromURL();
 	getOptions();	
 	prepQuiz();	
+	quizTaken();
+
 
 
 });

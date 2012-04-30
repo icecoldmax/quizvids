@@ -1,4 +1,3 @@
-<?php session_start();?>
 <!DOCTYPE html>
 
 <!-- <?php 
@@ -76,11 +75,42 @@
 
  
  </script>
+
+<style type="text/css">
+
+/*html, body {
+	background-image: url('images/theater.jpg');
+
+}*/
+
+#layer1 {
+	width: 71%;
+	margin: 300px auto 0px auto;
+}
+
+.bgImage {
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -3001;
+	/*overflow: hidden;*/
+}
+
+#wrapperDiv {
+	width: 100%;
+	/*overflow: hidden;*/
+}
+
+</style>
+
 </head>
 
-<body>
+<body id="pageBody">
+	<img class="bgImage" src="images/theater.jpg" alt="" />
 
-<h1>QuizVidz!</h1>
+<!-- <h1>QuizVidz!</h1> -->
+<div id="wrapperDiv">
 
 <div id="layer1">
 	<div id="ytplayer"></div>
@@ -115,23 +145,25 @@
 		<p><input id="vidCodeInput" type="text" size="50" placeholder="Paste a youtube link here!" /><input id="vidCodeSubmit" type="submit" value="Load" /></p>
 	 </form> -->
 	
-<div id="quizPlaylist">
+<!-- <div id="quizPlaylist">
 	<h3>Playlist</h3>
 	<ul>
-	<!-- <?php 
+		// <?php 
 			//foreach ($vids as $vidcode) {
 			//	echo "<li class=\"playlistEntry\">$vidcode</li>";
 			//}
-		?> -->
+		//?>
 	</ul>
 	
 	<div id="prevNextButtons">
 		<button id="prevVid">Prev Video</button>
 		<button id="nextVid">Next Video</button>
 	</div>
-</div>
+</div> 
 	
-<div id="videosBar"></div>
+<div id="videosBar"></div> -->
+
+</div>
 
 <div class="jqmWindow" id="popup">
 	<h1>Quiz time!</h1>

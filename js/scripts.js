@@ -859,3 +859,13 @@ function adjustVidQuality() {
 		ytplayer.setPlaybackQuality('highres')
 	} 
 }
+
+function quizTaken() {
+	var quiz_taken = "yes";
+	$.post('qvdb/quizcountupdate.php',
+		{ quiz_taken: quiz_taken },
+		function(data) {
+			console.log(data);
+		}
+	);
+}
